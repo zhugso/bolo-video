@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhugso.web.app.mapper.VideoMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhugso.model.entity.Video">
+            <id property="videoId" column="video_id" />
+            <result property="title" column="title" />
+            <result property="description" column="description" />
+            <result property="playCount" column="play_count" />
+            <result property="duration" column="duration" />
+            <result property="coverUrl" column="cover_url" />
+            <result property="videoUrl" column="video_url" />
+            <result property="categoryId" column="category_id" />
+            <result property="copyright" column="copyright" />
+            <result property="userId" column="user_id" />
+            <result property="uploadTime" column="upload_time" />
+            <result property="status" column="status" />
+            <result property="isDelete" column="is_delete" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        video_id,title,description,play_count,duration,cover_url,
+        video_url,category_id,copyright,user_id,upload_time,
+        status,is_delete
+    </sql>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhugso.web.admin.mapper.CheckNopassMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhugso.model.entity.CheckNopass">
+            <id property="id" column="id" />
+            <result property="reason" column="reason" />
+            <result property="videoId" column="video_id" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,reason,video_id
+    </sql>
+</mapper>
