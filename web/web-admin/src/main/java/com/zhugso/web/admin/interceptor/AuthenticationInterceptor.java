@@ -15,7 +15,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         // 1. 获取token
         String token = request.getHeader("Authorization");
         if(token == null){
-            throw new BoloException(ResultCodeEnum.ADMIN_LOGIN_AUTH);
+            throw new BoloException(ResultCodeEnum.LOGIN_AUTH);
         }
 
         // 2. 判断token是否正确，不正确则抛出异常
