@@ -7,13 +7,13 @@ import com.zhugso.web.app.service.VideoService;
 import org.springframework.stereotype.Service;
 
 /**
-* @author zhugso
-* @description 针对表【video】的数据库操作Service实现
-* @createDate 2025-03-20 01:00:48
-*/
+ * @author zhugso
+ * @description 针对表【video】的数据库操作Service实现
+ * @createDate 2025-03-20 01:00:48
+ */
 @Service
 public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video>
-    implements VideoService {
+        implements VideoService {
 
 }
 

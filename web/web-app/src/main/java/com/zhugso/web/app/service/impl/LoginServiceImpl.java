@@ -98,7 +98,7 @@ public class LoginServiceImpl implements LoginService {
         queryWrapper.eq(User::getUsername, loginVo.getName());
 
         if(userMapper.exists(queryWrapper)){
-            throw new BoloException(ResultCodeEnum.ACCOUNT_NOT_EXIST_ERROR);
+            throw new BoloException(ResultCodeEnum.ACCOUNT_EXIST_ERROR);
         }
 
         // 3. 添加到数据库

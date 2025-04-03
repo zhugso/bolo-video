@@ -1,7 +1,11 @@
 package com.zhugso.web.app.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhugso.model.entity.Video;
+
+import java.util.List;
 
 /**
 * @author zhugso
