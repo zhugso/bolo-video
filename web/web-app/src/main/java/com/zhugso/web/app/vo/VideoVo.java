@@ -47,4 +47,10 @@ public class VideoVo {
     @Schema(description = "视频上传用户头像Url")
     private String avatarUrl;
 
+    @Schema(description = "视频点赞数")
+    private Integer thumbs;
+
+    @Schema(description = "视频收藏数")
+    private Integer collect;
+
 }

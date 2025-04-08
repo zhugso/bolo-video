@@ -35,6 +35,9 @@ public class ResultData<T> {
     public static <T> ResultData<T> success(T data){
         return build(data, ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getMessage());
     }
+    public static <T> ResultData<T> success(){
+        return success(null);
+    }
 
     public static <T> ResultData<T> fail(ResultCodeEnum resultCodeEnum){
         return build(null, resultCodeEnum.getCode(), resultCodeEnum.getMessage());

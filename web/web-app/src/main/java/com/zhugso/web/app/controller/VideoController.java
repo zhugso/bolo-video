@@ -95,7 +95,7 @@ public class VideoController {
         }
 
         return ResultData.success(videoCardVoList);
-}
+    }
 
 
 }
