@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResultData<String> exception(Exception e){
         log.error("全局异常信息:{}", e.getMessage(), e);
-        ResultCodeEnum codeEnum = ResultCodeEnum.getResultCodeEnumV2(e.getMessage());
+        ResultCodeEnum codeEnum = ResultCodeEnum.getResultMessageEnum(e.getMessage());
         if(codeEnum != null)
             return ResultData.fail(codeEnum);
         return ResultData.fail(ResultCodeEnum.SERVER_ERROR.getCode(), e.getMessage());

@@ -66,6 +66,15 @@ public enum ResultCodeEnum {
         return Arrays.stream(ResultCodeEnum.values()).filter(x -> x.getCode().equalsIgnoreCase(code)).findFirst().orElse(null);
     }
 
+    public static ResultCodeEnum getResultMessageEnum(String message) {
+        for (ResultCodeEnum element : ResultCodeEnum.values()) {
+            if(element.getMessage().equalsIgnoreCase(message)){
+                return element;
+            }
+        }
+        return null;
+    }
+
 //    public static void main(String[] args) {
 //        System.out.println(ReturnCodeEnum.getReturnCodeEnumV1("200"));
 //        System.out.println(ReturnCodeEnum.getReturnCodeEnumV1("200").getCode());
