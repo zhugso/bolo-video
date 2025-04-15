@@ -16,43 +16,19 @@ public class Knife4jConfiguration {
                 .version("1.0")
                 .description("用户使用的网页api"));
     }
-
     @Bean
-    public GroupedOpenApi personAPI(){
+    public GroupedOpenApi userAPI(){
         return GroupedOpenApi.builder()
-                .group("个人中心管理")
-                .pathsToMatch("/person/**")
+                .group("用户api")
+                .pathsToMatch("/user/**")
                 .build();
     }
 
     @Bean
-    public GroupedOpenApi searchAPI(){
+    public GroupedOpenApi uploadAPI(){
         return GroupedOpenApi.builder()
-                .group("信息搜索")
-                .pathsToMatch("/search/**")
-                .build();
-    }
-
-    @Bean
-    public GroupedOpenApi videoAPI(){
-        return GroupedOpenApi.builder()
-                .group("视频信息")
-                .pathsToMatch("/video/**")
-                .build();
-    }
-    @Bean
-    public GroupedOpenApi loginAPI(){
-        return GroupedOpenApi.builder()
-                .group("登录api")
-                .pathsToMatch("/login/**")
-                .build();
-    }
-
-    @Bean
-    public GroupedOpenApi logonAPI(){
-        return GroupedOpenApi.builder()
-                .group("注册api")
-                .pathsToMatch("/logon/**")
+                .group("上传api")
+                .pathsToMatch("/upload/**")
                 .build();
     }
 

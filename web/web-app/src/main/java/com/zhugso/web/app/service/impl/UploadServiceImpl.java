@@ -6,6 +6,7 @@ import com.zhugso.common.result.ResultCodeEnum;
 import com.zhugso.model.entity.Video;
 import com.zhugso.web.app.mapper.VideoMapper;
 import com.zhugso.web.app.service.UploadService;
+import com.zhugso.web.app.vo.AvatarUrlVo;
 import com.zhugso.web.app.vo.CoverUrlVo;
 import com.zhugso.web.app.vo.VideoInfoVo;
 import com.zhugso.web.app.vo.VideoUrlVo;
@@ -99,6 +100,7 @@ public class UploadServiceImpl implements UploadService {
     }
 
 
+
     @Override
     public void submitVideo(Long userId, VideoInfoVo videoInfoVo) {
         // 获取key
@@ -125,5 +127,36 @@ public class UploadServiceImpl implements UploadService {
         stringRedisTemplate.delete(videoInfoVo.getCoverKey());
 
     }
+
+
+    @Override
+    public AvatarUrlVo getUploadAvatarUrl() {
+        // 设置文件路径及文件名
+        String fileName = "a/" + System.currentTimeMillis() + UUID.randomUUID();
+        // 设置redis key
+        String key = "upAvatar:" + UUID.randomUUID();
+        // 存入redis
+        stringRedisTemplate.opsForValue()
+                .set(key, fileName, 10, TimeUnit.MINUTES);
+
+        String url;
+        Map<String, String> reqParams = new HashMap<>();
+        reqParams.put("content_type", "application/octet-stream");
+        try {
+            url = minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder()
+                    .method(Method.PUT)
+                    .bucket(minioProperties.getBucketName())
+                    .object(fileName)
+                    .expiry(10, TimeUnit.MINUTES)
+                    .extraQueryParams(reqParams)
+                    .build());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BoloException(ResultCodeEnum.FAIL);
+        }
+
+        return new AvatarUrlVo(url, key);
+    }
+
 
 }

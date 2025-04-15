@@ -8,10 +8,8 @@ import com.zhugso.web.app.vo.UserHeadInfoVo;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "用户信息管理")
 @RestController
@@ -20,6 +18,9 @@ public class UserController {
 
     @Resource
     UserService userService;
+
+    @Resource
+    StringRedisTemplate stringRedisTemplate;
 
     @GetMapping("head-user")
     public ResultData<UserHeadInfoVo> getUserInfo(@RequestHeader("Authorization") String token){
@@ -38,5 +39,26 @@ public class UserController {
         return ResultData.success(userHeadInfoVo);
     }
 
+    @PostMapping("avatar/{avatarKey}")
+    public ResultData<?> avatarModify(@RequestHeader("Authorization") String token,
+                                      @PathVariable("avatarKey") String avatarKey){
+        Long userId = JwtUtil.getUserIdToken(token);
+        User user = userService.getById(userId);
+
+        String url = stringRedisTemplate.opsForValue().get(avatarKey);
+
+        user.setAvatarUrl(url);
+
+        userService.saveOrUpdate(user);
+
+        return ResultData.success();
+    }
+
+    @GetMapping("avatar")
+    public ResultData<String> getAvatar(@RequestHeader("Authorization") String token){
+        Long userId = JwtUtil.getUserIdToken(token);
+        User user = userService.getById(userId);
+        return ResultData.success(user.getAvatarUrl());
+    }
 
 }

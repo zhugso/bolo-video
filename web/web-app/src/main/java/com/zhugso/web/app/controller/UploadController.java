@@ -3,6 +3,7 @@ package com.zhugso.web.app.controller;
 import com.zhugso.common.result.ResultData;
 import com.zhugso.common.utils.JwtUtil;
 import com.zhugso.web.app.service.UploadService;
+import com.zhugso.web.app.vo.AvatarUrlVo;
 import com.zhugso.web.app.vo.CoverUrlVo;
 import com.zhugso.web.app.vo.VideoInfoVo;
 import com.zhugso.web.app.vo.VideoUrlVo;
@@ -40,4 +41,13 @@ public class UploadController {
         uploadService.submitVideo(userId, videoInfoVo);
         return ResultData.success(null);
     }
+
+    @Operation(summary = "获取上传用户头像地址")
+    @GetMapping("avatar-url")
+    public ResultData<AvatarUrlVo> getUploadAvatarUrl(){
+        AvatarUrlVo avatarUrl = uploadService.getUploadAvatarUrl();
+        return ResultData.success(avatarUrl);
+    }
+
+
 }
