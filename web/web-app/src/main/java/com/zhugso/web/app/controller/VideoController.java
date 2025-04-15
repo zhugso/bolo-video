@@ -12,6 +12,7 @@ import com.zhugso.web.app.service.UserService;
 import com.zhugso.web.app.service.VideoService;
 import com.zhugso.web.app.vo.VideoCardVo;
 import com.zhugso.web.app.vo.VideoVo;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -34,6 +35,7 @@ public class VideoController {
     @Resource
     UserService userService;
 
+    @Operation(summary = "获取视频卡片信息")
     @GetMapping("videoCards/{count}")
     public ResultData<List<VideoCardVo>> getVideoCardList(@PathVariable Integer count) {
         LambdaQueryWrapper<Video> queryWrapper = new LambdaQueryWrapper<>();
@@ -56,6 +58,7 @@ public class VideoController {
     }
 
 
+    @Operation(summary = "获取视频")
     @GetMapping("videos/{id}")
     public ResultData<VideoVo> getVideoInfo(@PathVariable("id") Long id) {
         Video video = videoService.getById(id);
@@ -71,9 +74,10 @@ public class VideoController {
 
 
     /**
-     * @param text
-     * @return
+     * @param text pageNum
+     * @return ResultData<List<VideoCardVo>>
      */
+    @Operation(summary = "获取搜索视频")
     @GetMapping("search-videos/{text}")
     public ResultData<List<VideoCardVo>> getSearchInfo(@PathVariable("text") String text, @RequestParam("page") Integer pageNum) {
 

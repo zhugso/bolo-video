@@ -5,6 +5,7 @@ import com.zhugso.common.utils.JwtUtil;
 import com.zhugso.model.entity.User;
 import com.zhugso.web.app.service.UserService;
 import com.zhugso.web.app.vo.UserHeadInfoVo;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
@@ -22,6 +23,7 @@ public class UserController {
     @Resource
     StringRedisTemplate stringRedisTemplate;
 
+    @Operation(summary = "获取顶部用户信息")
     @GetMapping("head-user")
     public ResultData<UserHeadInfoVo> getUserInfo(@RequestHeader("Authorization") String token){
 
@@ -39,6 +41,9 @@ public class UserController {
         return ResultData.success(userHeadInfoVo);
     }
 
+
+
+    @Operation(summary = "修改头像")
     @PostMapping("avatar/{avatarKey}")
     public ResultData<?> avatarModify(@RequestHeader("Authorization") String token,
                                       @PathVariable("avatarKey") String avatarKey){
@@ -54,6 +59,7 @@ public class UserController {
         return ResultData.success();
     }
 
+    @Operation(summary = "获取头像")
     @GetMapping("avatar")
     public ResultData<String> getAvatar(@RequestHeader("Authorization") String token){
         Long userId = JwtUtil.getUserIdToken(token);
