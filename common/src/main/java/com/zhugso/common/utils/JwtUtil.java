@@ -42,4 +42,13 @@ public class JwtUtil {
         return claimsJws.getPayload().get("userId", Long.class);
     }
 
+    public static String getUsernameFromToken(String token) {
+        Jws<Claims> claimsJws = Jwts.parser()
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(token);
+
+        return claimsJws.getPayload().get("username", String.class);
+    }
+
 }
