@@ -33,7 +33,7 @@ public class UserController {
 
         BeanUtils.copyProperties(user, userHeadInfoVo);
 
-        // 暂未实现
+        // TODO 暂未实现
         userHeadInfoVo.setFollowNums(999);
         userHeadInfoVo.setFansNums(999);
         userHeadInfoVo.setDynamicNums(999);
